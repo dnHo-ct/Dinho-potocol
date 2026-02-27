@@ -13,13 +13,9 @@ Aujourd'hui, le Protocole Dinho v.1.4.3 est mon invention. Elle m'a permis de st
 
 Pour que le **Protocole Dinho** fonctionne à 100%, j'utilise et je recommande ces outils. En passant par ces liens, vous soutenez le projet et le développement de l'IA (et vous bénéficiez parfois de bonus exclusifs) :
 
-* **⚡ Le Terminal : [NOM DU BROKER - EX: XTB]**
-    * *Pourquoi :* Exécution rapide, spreads serrés et idéal pour les micro-lots (0.01).
-    * [👉 Inscrivez-vous ici - Ton Lien d'Affiliation]
-
-* **📊 La Source de Vérité : TRADINGVIEW**
-    * *Pourquoi :* Indispensable pour le Volume Profile (POC) et le Radar RSI M15.
-    * [👉 Obtenir TradingView Pro - Ton Lien d'Affiliation]
+   
+* **📊 pour soutenir le projet  😁:
+* https://fr.tipeee.com/dinho-protocol/
 
 * **🤖 L'IA DINHO (GEMINI CUSTOM)**
     * *Pourquoi :* Pour accéder à mon interface d'analyse assistée.
