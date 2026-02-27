@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROTOCOLE DINHO v.1.4.3 | Architecture IA</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; background-color: #0a0a0a; color: #d0d0d0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: auto; border: 1px solid #1a1a1a; padding: 40px; border-radius: 5px; box-shadow: 0 0 30px rgba(0,255,0,0.02); }
+        
+        h1 { color: #00ff00; border-bottom: 2px solid #00ff00; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { color: #ff9900; margin-top: 35px; text-transform: uppercase; font-size: 1.1em; border-left: 4px solid #ff9900; padding-left: 15px; }
+        
+        .status-bar { background: #111; padding: 10px; border-radius: 3px; border: 1px solid #222; margin-bottom: 30px; font-size: 0.8em; }
+        .status-online { color: #00ff00; font-weight: bold; animation: blink 2s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        .story-box { background: #111; padding: 20px; border-radius: 5px; border-left: 4px solid #00ff00; margin: 25px 0; font-style: italic; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; background-color: #0f0f0f; }
+        th, td { border: 1px solid #222; padding: 15px; text-align: left; }
+        th { background-color: #1a1a1a; color: #00ff00; text-transform: uppercase; font-size: 0.9em; }
+        
+        .cta-box { text-align: center; margin-top: 50px; padding: 20px; border: 1px dashed #444; }
+        .btn { color: #00ff00; text-decoration: none; border: 1px solid #00ff00; padding: 10px 20px; transition: 0.3s; }
+        .btn:hover { background: #00ff00; color: #000; }
+
+        .footer { margin-top: 60px; font-size: 0.7em; color: #444; text-align: center; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="status-bar">
+        SYSTÈME : <span class="status-online">● PROTOCOLE DINHO OPÉRATIONNEL</span> | VERSION : 1.4.3 | UTILISATEUR : STALAG (ACT)
+    </div>
+
+    <h1>L'Invention qui libère votre trading</h1>
+    
+    <div class="story-box">
+        "J'étais ce trader. Fauché, épuisé par la charge mentale, piégé par les Javelots institutionnels. J'ai passé 10 mois à entraîner Google Gemini pour qu'il devienne mon Juge de Paix. Le Protocole Dinho n'est pas un indicateur, c'est une libération."
+    </div>
+
+    <h2>01. La Solution : Confluence Artificielle</h2>
+    <p>Le Protocole Dinho v.1.4.3 utilise la puissance de calcul de l'IA pour assembler les pièces du puzzle que l'humain ne voit plus sous stress. Nous ne prédisons pas, nous filtrons le bruit pour ne garder que le signal pur.</p>
+
+    <h2>02. Le Radar de Décision (v.1.4.3)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Composante</th>
+                <th>Analyse IA</th>
+                <th>Objectif Bon Sens</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Structure HTF</td>
+                <td>Cartographie H4/Daily</td>
+                <td>Identifier le mur institutionnel.</td>
+            </tr>
+            <tr>
+                <td>Momentum RSI</td>
+                <td>Scan de Divergence M15</td>
+                <td>Détecter le mensonge du prix.</td>
+            </tr>
+            <tr>
+                <td>Volume POC</td>
+                <td>Zone de Valeur (VPVR)</td>
+                <td>Repérer l'équilibre vs l'excès.</td>
+            </tr>
+            <tr>
+                <td>Manipulation</td>
+                <td>Détection de Javelot</td>
+                <td>Éviter l'appât avant l'explosion.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>03. Rejoindre la Communauté</h2>
+    <p>Le trading est un sport de combat. Ne combattez plus seul. Rejoignez les traders qui utilisent l'IA pour protéger leur capital et leur santé mentale.</p>
+
+    <div class="cta-box">
+        <p>Accéder aux outils de l'ACT (Affiliation & Accès IA) :</p><br>
+        <a href="#" class="btn">DÉCOUVRIR L'ARSENAL</a>
+    </div>
+
+    <div class="footer">
+        Édition Limitée - Propriété de STALAG - Propulsé par Google Gemini Intelligence.
+    </div>
+</div>
+
+</body>
+</html>
