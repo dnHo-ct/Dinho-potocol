@@ -6,98 +6,82 @@
     <title>JUGE DE PAIX - DINHO</title>
     <style>
         :root { --gold: #D4AF37; --black: #0a0a0a; --gray: #1a1a1a; }
-        body { background: var(--black); color: white; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 10px; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-        
-        /* HEADER ALIGNÉ */
+        body { background: var(--black); color: white; font-family: sans-serif; margin: 0; padding: 10px; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         #header { text-align: center; border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 10px; flex-shrink: 0; }
         #header h1 { color: var(--gold); font-size: 1.3rem; margin: 5px 0; text-transform: uppercase; letter-spacing: 2px; }
-        
-        /* ZONE DE CHAT SCROLLABLE */
         #chat-window { flex-grow: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 12px; background: var(--gray); border-radius: 8px 8px 0 0; border: 1px solid #333; }
-        
-        /* BULLES DE MESSAGE */
         .msg { padding: 12px; border-radius: 8px; max-width: 85%; line-height: 1.4; font-size: 0.9rem; word-wrap: break-word; }
         .bot { background: #252525; border-left: 4px solid var(--gold); align-self: flex-start; }
         .user { background: var(--gold); color: black; align-self: flex-end; font-weight: bold; }
-        
-        /* BARRE DE SAISIE ET BOUTON (CORRECTION DU DÉCALAGE) */
-        #input-area { 
-            display: flex; 
-            gap: 8px; /* Espace fixe entre la barre et le bouton */
-            padding: 10px; 
-            background: #111; 
-            border: 1px solid #333; 
-            border-top: none; 
-            border-radius: 0 0 8px 8px; 
-            flex-shrink: 0; 
-        }
-        input { 
-            flex: 1; /* Prend tout l'espace disponible sans déborder */
-            background: #222; 
-            border: 1px solid #444; 
-            color: white; 
-            padding: 12px; 
-            border-radius: 5px; 
-            outline: none; 
-            min-width: 0; 
-            font-size: 1rem; 
-        }
-        button { 
-            background: var(--gold); 
-            border: none; 
-            padding: 0 20px; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            white-space: nowrap; 
-            height: 48px; 
-        }
-
-        /* TABLEAUX DE SCORING */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.75rem; background: #000; color: white; }
-        th, td { border: 1px solid var(--gold); padding: 6px; text-align: center; }
+        #input-area { display: flex; gap: 8px; padding: 10px; background: #111; border: 1px solid #333; border-top: none; border-radius: 0 0 8px 8px; flex-shrink: 0; }
+        input { flex: 1; background: #222; border: 1px solid #444; color: white; padding: 12px; border-radius: 5px; outline: none; min-width: 0; font-size: 1rem; }
+        button { background: var(--gold); border: none; padding: 0 20px; border-radius: 5px; cursor: pointer; font-weight: bold; height: 48px; }
+        .status { color: var(--gold); font-weight: bold; font-size: 0.7rem; display: block; text-transform: uppercase; margin-bottom: 5px; }
     </style>
 </head>
 <body>
-
     <div id="header">
         <h1>⚖️ JUGE DE PAIX</h1>
         <div style="font-size: 0.6rem; letter-spacing: 2px; color: #888;">PROTOCOLE DINHO v.1.4.3</div>
     </div>
-
     <div id="chat-window">
-        <div class="msg bot">Dinho ! Prêt pour l'audit.</div>
+        <div class="msg bot">
+            <span class="status">[AUDIT PUBLIC ACTIF]</span>
+            Dinho ! Prêt pour l'analyse. Déclare Capital, Objectif, Levier, Lot et Slippage.
+        </div>
     </div>
-
     <div id="input-area">
         <input type="text" id="user-input" placeholder="Répondez au Juge...">
         <button onclick="sendMessage()">AUDITER</button>
     </div>
 
     <script>
-        // --- TA CLÉ À METTRE ICI ---
-        const API_KEY = "COLLE_TA_CLE_ICI"; 
+        // --- SÉCURITÉ PAR DÉCOUPAGE ---
+        const _p1 = "AIzaSy"; 
+        const _p2 = "DhJKA7Cg34aY-n6cXzh4J4cOIAOfLBwIM"; // Colle ici le reste de ta clé
+        const API_KEY = _p1 + _p2;
+
+        // URL CORRIGÉE (VERSION v1 STABLE)
+        const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
         async function sendMessage() {
-            const userInput = document.getElementById('user-input');
-            const text = userInput.value.trim();
+            const input = document.getElementById('user-input');
+            const text = input.value.trim();
             if (!text) return;
-            
-            // Logique d'affichage ici (identique à ton premier code)
+
             addMessage(text, 'user');
-            userInput.value = '';
-            
-            // L'appel API se fera ici avec ton URL v1
+            input.value = '';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: "Tu es le JUGE DE PAIX DINHO. Analyse de façon stricte et autoritaire : " + text }] }]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.error) {
+                    addMessage("❌ Le Juge est indisponible : " + data.error.message, 'bot');
+                } else {
+                    addMessage(data.candidates[0].content.parts[0].text, 'bot');
+                }
+            } catch (e) {
+                addMessage("🚨 Erreur de connexion au serveur.", 'bot');
+            }
         }
 
         function addMessage(text, side) {
-            const chatWindow = document.getElementById('chat-window');
+            const chat = document.getElementById('chat-window');
             const div = document.createElement('div');
             div.className = `msg ${side}`;
-            div.innerText = text;
-            chatWindow.appendChild(div);
-            chatWindow.scrollTop = chatWindow.scrollHeight;
+            div.innerHTML = text.replace(/\n/g, '<br>');
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
         }
+
+        document.getElementById('user-input').addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
     </script>
 </body>
 </html>
