@@ -6,7 +6,7 @@
     <title>JUGE DE PAIX - DINHO</title>
     <style>
         :root { --gold: #D4AF37; --black: #0a0a0a; --gray: #1a1a1a; }
-        body { background: var(--black); color: white; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 10px; height: 100vh; display: flex; flex-direction: column; }
+        body { background: var(--black); color: white; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 10px; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
         #header { text-align: center; border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 10px; flex-shrink: 0; }
         #header h1 { color: var(--gold); font-size: 1.3rem; margin: 5px 0; text-transform: uppercase; letter-spacing: 2px; }
@@ -19,12 +19,11 @@
         
         #input-area { display: flex; gap: 8px; padding: 10px; background: #111; border: 1px solid #333; border-top: none; border-radius: 0 0 8px 8px; flex-shrink: 0; }
         input { flex: 1; background: #222; border: 1px solid #444; color: white; padding: 12px; border-radius: 5px; outline: none; min-width: 0; font-size: 1rem; }
-        button { background: var(--gold); border: none; padding: 0 20px; border-radius: 5px; cursor: pointer; font-weight: bold; white-space: nowrap; height: 48px; transition: 0.3s; }
-        button:active { transform: scale(0.95); opacity: 0.8; }
+        button { background: var(--gold); border: none; padding: 0 20px; border-radius: 5px; cursor: pointer; font-weight: bold; white-space: nowrap; height: 48px; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.75rem; background: #000; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.75rem; background: #000; color: white; }
         th, td { border: 1px solid var(--gold); padding: 6px; text-align: center; }
-        .status { color: var(--gold); font-weight: bold; font-size: 0.7rem; margin-bottom: 5px; display: block; }
+        .status { color: var(--gold); font-weight: bold; font-size: 0.7rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -50,14 +49,17 @@
     <script>
         // --- SÉCURITÉ DINHO ---
         const _p1 = "AIzaSy"; 
-        const _p2 = "ANwkhDzmaKRtMCsB2lY8KHAflhOIHGacU"; 
+        const _p2 = "ANwkhDzmaKRtMCsB2lY8KHAflhOIHGacU"; // 
         const API_KEY = _p1 + _p2;
 
-        const SYSTEM_PROMPT = `Tu es le JUGE DE PAIX DINHO v.1.4.3. Ton ton est strict et autoritaire. 
-        1. Bloque l'analyse si les chiffres manquent. 
+        // URL CORRIGÉE (v1)
+        const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+        const SYSTEM_PROMPT = `Tu es le JUGE DE PAIX DINHO v.1.4.3. Ton ton est strict, froid et autoritaire. 
+        1. Bloque l'analyse si les chiffres (Capital, Objectif, Levier, Lot, Slippage) manquent. 
         2. Calcule tout en POURCENTAGE (%). 
-        3. Fournis un TABLEAU de scoring : Structure HTF (20%), RSI Div (30%), POC (20%), Javelot (20%), Miroir (10%). 
-        4. Verdict : <70% REJETÉ / >90% VALIDÉ.`;
+        3. Pour chaque audit, fournis TOUJOURS un TABLEAU de scoring : Structure HTF (20%), RSI Div (30%), POC (20%), Javelot (20%), Miroir (10%). 
+        4. Verdict final : <70% REJETÉ / >90% VALIDÉ.`;
 
         const chatWindow = document.getElementById('chat-window');
         const userInput = document.getElementById('user-input');
@@ -70,7 +72,11 @@
             userInput.value = '';
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, 
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: SYSTEM_PROMPT + "\n\nUtilisateur: " + text }] }]
                     })
                 });
 
@@ -93,20 +99,20 @@
         function addMessage(text, side) {
             const div = document.createElement('div');
             div.className = `msg ${side}`;
-            // Conversion basique du Markdown en HTML
-            let formattedText = text.replace(/\n/g, '<br>')
-                                   .replace(/\|/g, '│')
-                                   .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            div.innerHTML = formattedText;
+            
+            // Formatage intelligent pour afficher les tableaux Markdown proprement
+            let htmlContent = text.replace(/\n/g, '<br>')
+                                  .replace(/\|/g, '│')
+                                  .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            
+            div.innerHTML = htmlContent;
             chatWindow.appendChild(div);
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        // Permet d'envoyer avec la touche "Entrée"
+        // Touche Entrée pour mobile/clavier
         userInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
+            if (event.key === "Enter") sendMessage();
         });
     </script>
 </body>
