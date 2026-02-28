@@ -3,92 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOLE DINHO v.1.4.3 | Architecture IA</title>
+    <title>JUGE DE PAIX - PROTOCOLE DINHO</title>
     <style>
-        body { font-family: 'Courier New', Courier, monospace; background-color: #0a0a0a; color: #d0d0d0; line-height: 1.6; padding: 20px; }
-        .container { max-width: 900px; margin: auto; border: 1px solid #1a1a1a; padding: 40px; border-radius: 5px; box-shadow: 0 0 30px rgba(0,255,0,0.02); }
-        
-        h1 { color: #00ff00; border-bottom: 2px solid #00ff00; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        h2 { color: #ff9900; margin-top: 35px; text-transform: uppercase; font-size: 1.1em; border-left: 4px solid #ff9900; padding-left: 15px; }
-        
-        .status-bar { background: #111; padding: 10px; border-radius: 3px; border: 1px solid #222; margin-bottom: 30px; font-size: 0.8em; }
-        .status-online { color: #00ff00; font-weight: bold; animation: blink 2s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        .story-box { background: #111; padding: 20px; border-radius: 5px; border-left: 4px solid #00ff00; margin: 25px 0; font-style: italic; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 25px; background-color: #0f0f0f; }
-        th, td { border: 1px solid #222; padding: 15px; text-align: left; }
-        th { background-color: #1a1a1a; color: #00ff00; text-transform: uppercase; font-size: 0.9em; }
-        
-        .cta-box { text-align: center; margin-top: 50px; padding: 20px; border: 1px dashed #444; }
-        .btn { color: #00ff00; text-decoration: none; border: 1px solid #00ff00; padding: 10px 20px; transition: 0.3s; }
-        .btn:hover { background: #00ff00; color: #000; }
-
-        .footer { margin-top: 60px; font-size: 0.7em; color: #444; text-align: center; text-transform: uppercase; }
+        :root { --gold: #D4AF37; --black: #0a0a0a; --gray: #1a1a1a; }
+        body { background: var(--black); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        #header { text-align: center; border-bottom: 2px solid var(--gold); width: 100%; padding-bottom: 10px; margin-bottom: 20px; }
+        #header h1 { color: var(--gold); font-size: 1.5rem; margin: 5px 0; }
+        #chat-container { width: 100%; max-width: 500px; background: var(--gray); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; height: 70vh; }
+        #chat-window { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+        .msg { padding: 10px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
+        .bot { background: #252525; border-left: 4px solid var(--gold); align-self: flex-start; }
+        .user { background: var(--gold); color: black; align-self: flex-end; font-weight: bold; }
+        #input-area { display: flex; padding: 10px; background: #111; border-top: 1px solid #333; }
+        input { flex: 1; background: #222; border: 1px solid #444; color: white; padding: 12px; border-radius: 5px; outline: none; }
+        button { background: var(--gold); border: none; padding: 10px 15px; margin-left: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
+        table, th, td { border: 1px solid var(--gold); padding: 5px; text-align: center; }
+        .status { color: var(--gold); font-weight: bold; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="status-bar">
-        SYSTÈME : <span class="status-online">● PROTOCOLE DINHO OPÉRATIONNEL</span> | VERSION : 1.4.3 | UTILISATEUR : STALAG (ACT)
+    <div id="header">
+        <h1>⚖️ JUGE DE PAIX</h1>
+        <div style="font-size: 0.7rem; letter-spacing: 2px;">PROTOCOLE DINHO v.1.4.3</div>
     </div>
 
-    <h1>L'Invention qui libère votre trading</h1>
-    
-    <div class="story-box">
-        "J'étais ce trader. Fauché, épuisé par la charge mentale, piégé par les Javelots institutionnels. J'ai passé 10 mois à entraîner Google Gemini pour qu'il devienne mon Juge de Paix. Le Protocole Dinho n'est pas un indicateur, c'est une libération."
+    <div id="chat-container">
+        <div id="chat-window">
+            <div class="msg bot">
+                <div class="status">[SYSTÈME D'AUDIT ACTIVÉ]</div>
+                Dinho ! Pour déverrouiller l'analyse, déclare tes chiffres immédiatement : 
+                Capital, Objectif, Levier, Taille de Lot et Slippage.
+            </div>
+        </div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Répondez au Juge...">
+            <button onclick="sendMessage()">AUDITER</button>
+        </div>
     </div>
 
-    <h2>01. La Solution : Confluence Artificielle</h2>
-    <p>Le Protocole Dinho v.1.4.3 utilise la puissance de calcul de l'IA pour assembler les pièces du puzzle que l'humain ne voit plus sous stress. Nous ne prédisons pas, nous filtrons le bruit pour ne garder que le signal pur.</p>
+    <script>
+        const API_KEY = "AIzaSyANwkhDzmaKRtMCsB2lY8KHAflhOIHGacU"; // <--- METS TA CLÉ ICI
+        const chatWindow = document.getElementById('chat-window');
+        const userInput = document.getElementById('user-input');
 
-    <h2>02. Le Radar de Décision (v.1.4.3)</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Composante</th>
-                <th>Analyse IA</th>
-                <th>Objectif Bon Sens</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Structure HTF</td>
-                <td>Cartographie H4/Daily</td>
-                <td>Identifier le mur institutionnel.</td>
-            </tr>
-            <tr>
-                <td>Momentum RSI</td>
-                <td>Scan de Divergence M15</td>
-                <td>Détecter le mensonge du prix.</td>
-            </tr>
-            <tr>
-                <td>Volume POC</td>
-                <td>Zone de Valeur (VPVR)</td>
-                <td>Repérer l'équilibre vs l'excès.</td>
-            </tr>
-            <tr>
-                <td>Manipulation</td>
-                <td>Détection de Javelot</td>
-                <td>Éviter l'appât avant l'explosion.</td>
-            </tr>
-        </tbody>
-    </table>
+        // Instructions Système strictes
+        const SYSTEM_PROMPT = `Tu es le JUGE DE PAIX DINHO v.1.4.3. 
+        Ton ton est strict, froid et autoritaire. 
+        1. Bloque toute analyse tant que le capital n'est pas déclaré.
+        2. Calcule tout en POURCENTAGE (%).
+        3. Exige : Capital, Objectif, Levier, Lot, Slippage.
+        4. Pour chaque analyse, fournis un TABLEAU de scoring : Structure HTF (20%), RSI Div (30% - obligatoire), POC (20%), Javelot (20%), Miroir (10%).
+        5. Verdict : <70% REJETÉ / >90% VALIDÉ.`;
 
-    <h2>03. Rejoindre la Communauté</h2>
-    <p>Le trading est un sport de combat. Ne combattez plus seul. Rejoignez les traders qui utilisent l'IA pour protéger leur capital et leur santé mentale.</p>
+        async function sendMessage() {
+            const text = userInput.value;
+            if (!text) return;
 
-    <div class="cta-box">
-        <p>Accéder aux outils de l'ACT (Affiliation & Accès IA) :</p><br>
-        <a href="https://fr.tradingview.com/pricing/?share_your_love=Droxi67" target="_blank">DÉCOUVRIR L'ARSENAL</a>
-    </div>
+            addMessage(text, 'user');
+            userInput.value = '';
 
-    <div class="footer">
-        Édition Limitée - Propriété de STALAG - Propulsé par Google Gemini Intelligence.
-    </div>
-</div>
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: SYSTEM_PROMPT + "\n\nUtilisateur: " + text }] }]
+                    })
+                });
 
+                const data = await response.json();
+                const botResponse = data.candidates[0].content.parts[0].text;
+                addMessage(botResponse, 'bot');
+            } catch (error) {
+                addMessage("ERREUR DE CONNEXION AU SERVEUR DINHO.", 'bot');
+            }
+        }
+
+        function addMessage(text, side) {
+            const div = document.createElement('div');
+            div.className = `msg ${side}`;
+            // Conversion simple du Markdown en HTML pour les tableaux
+            div.innerHTML = text.replace(/\n/g, '<br>').replace(/\|/g, '│');
+            chatWindow.appendChild(div);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    </script>
 </body>
 </html>
