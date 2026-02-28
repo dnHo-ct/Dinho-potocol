@@ -2,67 +2,68 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JUGE DE PAIX - PROTOCOLE DINHO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JUGE DE PAIX - DINHO</title>
     <style>
         :root { --gold: #D4AF37; --black: #0a0a0a; --gray: #1a1a1a; }
-        body { background: var(--black); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        #header { text-align: center; border-bottom: 2px solid var(--gold); width: 100%; padding-bottom: 10px; margin-bottom: 20px; }
-        #header h1 { color: var(--gold); font-size: 1.5rem; margin: 5px 0; }
-        #chat-container { width: 100%; max-width: 500px; background: var(--gray); border: 1px solid #333; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; height: 70vh; }
-        #chat-window { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
-        .msg { padding: 10px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
-        .bot { background: #252525; border-left: 4px solid var(--gold); align-self: flex-start; }
-        .user { background: var(--gold); color: black; align-self: flex-end; font-weight: bold; }
-        #input-area { display: flex; padding: 10px; background: #111; border-top: 1px solid #333; }
-        input { flex: 1; background: #222; border: 1px solid #444; color: white; padding: 12px; border-radius: 5px; outline: none; }
-        button { background: var(--gold); border: none; padding: 10px 15px; margin-left: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
-        table, th, td { border: 1px solid var(--gold); padding: 5px; text-align: center; }
-        .status { color: var(--gold); font-weight: bold; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; }
+        body { background: var(--black); color: white; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 10px; height: 100vh; display: flex; flex-direction: column; }
+        
+        #header { text-align: center; border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 10px; flex-shrink: 0; }
+        #header h1 { color: var(--gold); font-size: 1.3rem; margin: 5px 0; text-transform: uppercase; letter-spacing: 2px; }
+        
+        #chat-window { flex-grow: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 12px; background: var(--gray); border-radius: 8px 8px 0 0; border: 1px solid #333; }
+        
+        .msg { padding: 12px; border-radius: 8px; max-width: 85%; line-height: 1.4; font-size: 0.9rem; word-wrap: break-word; }
+        .bot { background: #252525; border-left: 4px solid var(--gold); align-self: flex-start; color: #e0e0e0; }
+        .user { background: var(--gold); color: black; align-self: flex-end; font-weight: bold; border-right: 4px solid #b8860b; }
+        
+        #input-area { display: flex; gap: 8px; padding: 10px; background: #111; border: 1px solid #333; border-top: none; border-radius: 0 0 8px 8px; flex-shrink: 0; }
+        input { flex: 1; background: #222; border: 1px solid #444; color: white; padding: 12px; border-radius: 5px; outline: none; min-width: 0; font-size: 1rem; }
+        button { background: var(--gold); border: none; padding: 0 20px; border-radius: 5px; cursor: pointer; font-weight: bold; white-space: nowrap; height: 48px; transition: 0.3s; }
+        button:active { transform: scale(0.95); opacity: 0.8; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.75rem; background: #000; }
+        th, td { border: 1px solid var(--gold); padding: 6px; text-align: center; }
+        .status { color: var(--gold); font-weight: bold; font-size: 0.7rem; margin-bottom: 5px; display: block; }
     </style>
 </head>
 <body>
 
     <div id="header">
         <h1>⚖️ JUGE DE PAIX</h1>
-        <div style="font-size: 0.7rem; letter-spacing: 2px;">PROTOCOLE DINHO v.1.4.3</div>
+        <div style="font-size: 0.6rem; letter-spacing: 2px; color: #888;">PROTOCOLE DINHO v.1.4.3</div>
     </div>
 
-    <div id="chat-container">
-        <div id="chat-window">
-            <div class="msg bot">
-                <div class="status">[SYSTÈME D'AUDIT ACTIVÉ]</div>
-                Dinho ! Pour déverrouiller l'analyse, déclare tes chiffres immédiatement : 
-                Capital, Objectif, Levier, Taille de Lot et Slippage.
-            </div>
+    <div id="chat-window">
+        <div class="msg bot">
+            <span class="status">[SYSTÈME D'AUDIT EN LIGNE]</span>
+            Dinho ! Pour déverrouiller l'analyse, déclare tes chiffres : 
+            Capital, Objectif, Levier, Lot et Slippage.
         </div>
-        <div id="input-area">
-            <input type="text" id="user-input" placeholder="Répondez au Juge...">
-            <button onclick="sendMessage()">AUDITER</button>
-        </div>
+    </div>
+
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Répondez au Juge...">
+        <button onclick="sendMessage()">AUDITER</button>
     </div>
 
     <script>
-            // --- STRUCTURE DE SÉCURITÉ DINHO ---
-const _p1 = "AIzaSy"; 
-const _p2 = "ANwkhDzmaKRtMCsB2lY8KHAflhOIHGacU"; 
-const API_KEY = _p1 + _p2;
-// -----------------------------------
+        // --- SÉCURITÉ DINHO ---
+        const _p1 = "AIzaSy"; 
+        const _p2 = "ANwkhDzmaKRtMCsB2lY8KHAflhOIHGacU"; 
+        const API_KEY = _p1 + _p2;
+
+        const SYSTEM_PROMPT = `Tu es le JUGE DE PAIX DINHO v.1.4.3. Ton ton est strict et autoritaire. 
+        1. Bloque l'analyse si les chiffres manquent. 
+        2. Calcule tout en POURCENTAGE (%). 
+        3. Fournis un TABLEAU de scoring : Structure HTF (20%), RSI Div (30%), POC (20%), Javelot (20%), Miroir (10%). 
+        4. Verdict : <70% REJETÉ / >90% VALIDÉ.`;
+
         const chatWindow = document.getElementById('chat-window');
         const userInput = document.getElementById('user-input');
 
-        // Instructions Système strictes
-        const SYSTEM_PROMPT = `Tu es le JUGE DE PAIX DINHO v.1.4.3. 
-        Ton ton est strict, froid et autoritaire. 
-        1. Bloque toute analyse tant que le capital n'est pas déclaré.
-        2. Calcule tout en POURCENTAGE (%).
-        3. Exige : Capital, Objectif, Levier, Lot, Slippage.
-        4. Pour chaque analyse, fournis un TABLEAU de scoring : Structure HTF (20%), RSI Div (30% - obligatoire), POC (20%), Javelot (20%), Miroir (10%).
-        5. Verdict : <70% REJETÉ / >90% VALIDÉ.`;
-
         async function sendMessage() {
-            const text = userInput.value;
+            const text = userInput.value.trim();
             if (!text) return;
 
             addMessage(text, 'user');
@@ -78,21 +79,39 @@ const API_KEY = _p1 + _p2;
                 });
 
                 const data = await response.json();
-                const botResponse = data.candidates[0].content.parts[0].text;
-                addMessage(botResponse, 'bot');
+
+                if (data.error) {
+                    addMessage("❌ ERREUR API : " + data.error.message, 'bot');
+                } else if (data.candidates && data.candidates[0].content) {
+                    const botResponse = data.candidates[0].content.parts[0].text;
+                    addMessage(botResponse, 'bot');
+                } else {
+                    addMessage("⚠️ Le Juge reste muet. Vérifie ton entrée.", 'bot');
+                }
+
             } catch (error) {
-                addMessage("ERREUR DE CONNEXION AU SERVEUR DINHO.", 'bot');
+                addMessage("🚨 ERREUR RÉSEAU : Connexion interrompue.", 'bot');
             }
         }
 
         function addMessage(text, side) {
             const div = document.createElement('div');
             div.className = `msg ${side}`;
-            // Conversion simple du Markdown en HTML pour les tableaux
-            div.innerHTML = text.replace(/\n/g, '<br>').replace(/\|/g, '│');
+            // Conversion basique du Markdown en HTML
+            let formattedText = text.replace(/\n/g, '<br>')
+                                   .replace(/\|/g, '│')
+                                   .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            div.innerHTML = formattedText;
             chatWindow.appendChild(div);
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
+
+        // Permet d'envoyer avec la touche "Entrée"
+        userInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 </html>
